@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדריך התקנת Android Auto & CarPlay GEELY GEOMETRY C 480/360</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --code-bg: #090d16;
+            --warning-bg: #451a03;
+            --warning-border: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: #0f172a;
+            border-color: var(--accent-color);
+        }
+
+        .step-section {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .step-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+            color: #cbd5e1;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        p, ul, ol {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            padding-right: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code, pre {
+            background: var(--code-bg);
+            color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            direction: ltr;
+            text-align: left;
+            display: inline-block;
+        }
+
+        pre {
+            display: block;
+            padding: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #fef3c7;
+        }
+
+        .warning-box strong {
+            color: #fbbf24;
+        }
+
+        .screenshot-container {
+            margin: 20px 0;
+            text-align: center;
+            background: var(--code-bg);
+            border: 2px dashed var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .screenshot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .screenshot-placeholder {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: var(--border-color);
+            color: var(--text-main);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #475569;
+        }
+
+        .nav-btn.primary {
+            background: var(--accent-color);
+            color: #0f172a;
+        }
+
+        .nav-btn.primary:hover {
+            background: var(--accent-hover);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            .step-section { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>מדריך התקנת CarPlay & Android Auto</h1>
+        <p>Geely Geometry C 480/360 – מדריך שלב אחר שלב להתקנת AutoKit</p>
+    </header>
+
+    <!-- תפריט ניווט מהיר -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab(0)">1. דרישות ואזהרות</button>
+        <button class="tab-btn" onclick="switchTab(1)">2. הכנות במחשב וברכב</button>
+        <button class="tab-btn" onclick="switchTab(2)">3. תפריטים נסתרים ו-ADB</button>
+        <button class="tab-btn" onclick="switchTab(3)">4. התקנה מהמחשב (CMD)</button>
+        <button class="tab-btn" onclick="switchTab(4)">5. הגדרות סופיות</button>
+    </div>
+
+    <!-- חלק 1: אזהרות ודרישות -->
+    <section class="step-section active">
+        <h2>אזהרת אחריות ודרישות מוקדמות</h2>
+        
+        <div class="warning-box">
+            <strong>⚠️ אזהרת אחריות:</strong> כל התהליך המפורט במדריך זה מבוצע על אחריותו הבלעדית והמלאה של המשתמש. איבוד נתונים או שיבוש במערכת אינם באחריות כותב המדריך.
+        </div>
+        <div class="warning-box">
+            <p><strong>הודעות קופצות והרשאות:</strong> במהלך התהליך עשויות להופיע הודעות קופצות (Pop-ups) ובקשות הרשאה — הן במסך המחשב (כגון אישור חומת אש/Firewall או אישור תקשורת ADB) והן במסך המולטימדיה ברכב (כגון אישור ניפוי באגים/USB Debugging והרשאות גישה לאפליקציה). יש לענות בחיוב, לאשר ולתת את כל ההרשאות המבוקשות בכל הודעה שתקפוץ!</p>
+        </div>
+        <h3>ציוד נדרש והכנה מקדימה:</h3>
+        <ol>
+            <li>דונגל CCPA מותאם (Carlinkit / CCPA).</li>
+            <!-- קוד הוספת קישור לקניית הדונגל -->
+            <div style="margin: 15px 0; text-align: center;">
+                <a href="https://s.click.aliexpress.com/e/_c3EZEMYJ" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #38bdf8; color: #0f172a; padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background 0.2s;">
+                    🛒 לחץ כאן לרכישת דונגל תואם מומלץ (AliExpress)
+                </a>
+            </div>
+            <li>מחשב נייד המחובר לאותה רשת Wi-Fi (נקודה חמה/Hotspot) שאליה מחובר הרכב.</li>
+            <li>קובצי Platform Tools וקובץ <code>autokit.apk</code> שמורים במחשב.</li>
+            <div style="margin: 15px 0; text-align: center;">
+                <a href="https://mega.nz/file/M9Zy2BBQ?force_isolation=true#W0ZOgYPSVL6I1py9f8ikXQm6UdhlqhPRqSMZZTQHJCg" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #38bdf8; color: #0f172a; padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background 0.2s;">
+                    להורדת הקבצים לחץ כאן
+                </a>
+            </div>
+        </ol>
+
+        <div class="btn-group">
+            <div></div>
+            <button class="nav-btn primary" onclick="switchTab(1)">הבא: הכנות במחשב וברכב &gt;&gt;</button>
+        </div>
+    </section>
+
+    <!-- חלק 2: הכנת המחשב והרשת -->
+    <section class="step-section">
+        <h2>חלק א': הכנת המחשב, הרשת והשפה</h2>
+        
+        <h3>שלב 1: הכנת הקבצים במחשב</h3>
+        <p>חלץ את קובצי ה-Platform Tools יחד עם הקובץ <code>autokit.apk</code> לתיקייה הראשית בכונן <code>C</code> בנתיב:</p>
+        <pre>C:\platform-tools</pre>
+
+        <h3>שלב 2: חיבור לרשת משותפת</h3>
+        <p>ודא כי המחשב הנייד ומערכת המולטימדיה ברכב מחוברים לאותה רשת Wi-Fi.</p>
+        <div class="screenshot-container">
+            <img src="images/car wifi.png" alt="מסך התחברות ל-WIFI">
+            <div class="screenshot-placeholder">[מסך התחברות ל-WIFI]</div>
+        </div>
+        <h3>שלב 3: שינוי שפת המערכת ברכב לאנגלית</h3>
+        <p> היכנס להגדרות הרכב במסך הנהג באמצעות שליטה בגלגל ההגה לחיצה על כפתור ההגדרות בצד ימין בהגה וניווט באמצעות כפתורי הווליום (<code>הגדרות ⬅ הגדרות שפה</code>) ושנה את שפת הממשק מ-עברית ל-English.</p>
+        <p><em>צעד זה קריטי כדי להצליח להקליד בשלבים מתקדמים במדריך.</em></p>
+
+        <div class="screenshot-container">
+            <img src="images/wheel.jpeg" alt="שינוי שפה 1">
+            <div class="screenshot-placeholder">[שינוי שפה 1]</div>
+        </div>
+        <div class="screenshot-container">
+            <img src="images/setting.jpeg" alt="שינוי שפה 2">
+            <div class="screenshot-placeholder">[שינוי שפה 2]</div>
+        </div>
+        <div class="screenshot-container">
+            <img src="images/lang 1.jpeg" alt="שינוי שפה 3">
+            <div class="screenshot-placeholder">[שינוי שפה 3]</div>
+        </div>
+        <div class="screenshot-container">
+            <img src="images/lang2.jpeg" alt="שינוי שפה 4">
+            <div class="screenshot-placeholder">[שינוי שפה 4]</div>
+        </div>
+
+        <div class="btn-group">
+            <button class="nav-btn" onclick="switchTab(0)">&lt;&lt; הקודם</button>
+            <button class="nav-btn primary" onclick="switchTab(2)">הבא: תפריטים נסתרים ו-ADB &gt;&gt;</button>
+        </div>
+    </section>
+
+    <!-- חלק 3: הגדרות מולטימדיה ו-ADB ברכב -->
+    <section class="step-section">
+        <h2>חלק ב': הגדרות במערכת הרכב והפעלת מצב ADB</h2>
+        
+        <h3>שלב 4: כניסה לתפריט הנסתר הראשון בחייגן</h3>
+        <p>פתח את אפליקציית הטלפון/חייגן ברכב והקש קוד דינמי המחושב לפי הנוסחה:</p>
+        <pre>#* + [חודש + 10] + [יום בחודש] + [שעה בפורמט 12 שעות]</pre>
+        <p><em>דוגמה: בתאריך 17/03 בשעה 22:15 (10:15 בפורמט 12 שעות) — חודש (03)+10 = 13, יום = 17, שעה = 10 ⬅ הקוד יהיה <code>#*131710</code>.</em></p>
+        <div class="screenshot-container">
+            <img src="images/phone.png" alt="אפליקצית הטלפון הסלולרי">
+            <div class="screenshot-placeholder">[אפליקצית הטלפון הסלולרי]</div>
+        </div>
+        <h3>שלב 5: איתור כתובת ה-IP של הרכב</h3>
+        <p>בתפריט שנפתח, רשום בצד וזכור את כתובת ה-IP של הרכב המופיעה בטקסט הדיאגנוסטיקה משמאל (נשתמש בכתובת זו במספר שלבים בהמשך) (למשל <code>172.20.10.5</code>) [מסומן בצהוב] . ולחץ על הכפתור <strong>VAVE TBOX</strong> [מסומן בירוק]</p>
+        <div class="screenshot-container">
+            <img src="images/hide 1 with ip.png" alt="תפריט נסתר 1">
+            <div class="screenshot-placeholder">[תפריט נסתר 1]</div>
+        </div>
+
+        <h3>שלב 6: חשיפת התפריטים המוסתרים (LINK SLI)</h3>
+        <p>בפינה השמאלית העליונה של המסך, לחץ על הסמל <strong>LINK SLI</strong> [מסומן בירוק] כ-6 פעמים ברציפות עד שיופיעו כפתורים מוסתרים נוספים.</p>
+        <div class="screenshot-container">
+            <img src="images/tbox basic.png" alt="TBOX 1">
+            <div class="screenshot-placeholder">[TBOX]</div>
+        </div>
+        <h3>שלב 7: הפעלת שירות ה-Shell</h3>
+        <p>לחץ על הכפתור <strong>Shell</strong>[מסומן בירוק]  שנחשף ברשת הכפתורים במסך ה-TBOX Tool.</p>
+        <div class="screenshot-container">
+            <img src="images/tbox full.png" alt="TBOX 2">
+            <div class="screenshot-placeholder">[TBOX]</div>
+        </div>
+        <h3>שלב 8: הגדרת פורט התקשורת ADB</h3>
+        <p>מחק את המלל <code>ifconfig</code>  משורת הכתיבה בחלק העליון, הקלד בדיוק (באותיות קטנות) את הפקודה הבאה:</p>
+        <pre>setprop service.adb.tcp.port 5555</pre> [מסומן בצהוב]
+        <p>ולחץ על הכפתור הסגול הראשון מימין לשורת ההקלדה (<code>发送-Send</code>)[מסומן בירוק].</p>
+        <p><em>הערה חשובה: לא יופיע חיווי או אישור על המסך, הפעולה מבוצעת ברקע!</em></p>
+        <div class="screenshot-container">
+            <img src="images/shell open port.png" alt="SHELL">
+            <div class="screenshot-placeholder">[SHELL]</div>
+        </div>
+
+
+        <h3>שלב 9 & 10: כניסה שנייה לחייגן והפעלת ADB</h3>
+        <ol>
+            <li>חזור למסך החייגן ברכב והקש שוב את הקוד הדינמי השני המעודכן לפי השעה הנוכחית.</li>
+            <p>פתח את אפליקציית הטלפון/חייגן ברכב והקש קוד דינמי השני:</p>
+            <pre>#* + [חודש + 5] + [יום בחודש] + [שעה בפורמט 12 שעות]</pre>
+            <p><em>דוגמה: בתאריך 17/03 בשעה 21:15 (09:15 בפורמט 12 שעות) — חודש (03)+5 = 08, יום = 17, שעה = 09 ⬅ הקוד יהיה <code>#*081709</code>.</em></p>
+
+            <li>בתפריט הדיאגנוסטיקה שנפתח, אתר בשורה השנייה מימין את הכפתור <strong>ADB模式</strong> [מסומן בירוק] ולחץ עליו 4 פעמים ברציפות (שים לב להופעת חיווי בתחתית המסך) [מסומן בצהוב].</li>
+        </ol>
+
+        <div class="screenshot-container">
+            <img src="images/hide 2 adb coneect.png" alt="תפריט נסתר 2">
+            <div class="screenshot-placeholder">[תפריט נסתר 2]</div>
+        </div>
+
+        <div class="btn-group">
+            <button class="nav-btn" onclick="switchTab(1)">&lt;&lt; הקודם</button>
+            <button class="nav-btn primary" onclick="switchTab(3)">הבא: התקנה מהמחשב (CMD) &gt;&gt;</button>
+        </div>
+    </section>
+
+    <!-- חלק 4: חיבור והתקנה מ-CMD -->
+    <section class="step-section">
+        <h2>חלק ג': התחברות והתקנה מהמחשב (CMD)</h2>
+        
+        <h3>שלב 11: פתיחת שורת הפקודות במחשב</h3>
+        <p>לחץ על מקשים <code>Windows + R</code>, הקלד <code>cmd</code> ולחץ Enter.</p>
+
+        <div class="screenshot-container">
+            <img src="images/win r.png" alt="WIN + R">
+            <div class="screenshot-placeholder">[כניסה ל CMD]</div>
+        </div>
+
+        <h3>שלב 12: ניווט לתיקיית העבודה</h3>
+        <pre>cd C:\platform-tools</pre>
+        <div class="screenshot-container">
+            <img src="images/cd.png" alt="cd C:\platform-tools">
+            <div class="screenshot-placeholder">[הגדרת הפקודות בתיקיית ADB במחשב]</div>
+        </div>
+
+        <h3>שלב 13: בדיקת תקשורת לרכב (Ping)</h3>
+        <p>בצע בדיקת חיבור לרכב (החלף את ה-IP בכתובת שרשמת בשלב 5):</p>
+        <pre>ping 172.20.10.5</pre>
+        <p>וודא שמתקבלות תשובות תקינות. [כמו בתמונה]</p>
+        <div class="screenshot-container">
+            <img src="images/ping.jpeg" alt="ping">
+            <div class="screenshot-placeholder">[ביצוע פינג ]</div>
+        </div>
+
+        <h3>שלב 14: הגדרת תקשורת ADB ברשת</h3>
+        <pre>adb tcpip 5555</pre>
+        <div class="screenshot-container">
+            <img src="images/adb tcpip.jpeg" alt="tcpip">
+            <div class="screenshot-placeholder">[האזנה לפורט המוגדר ברכב]</div>
+        </div>
+
+
+        <h3>שלב 15: התחברות למערכת הרכב ואימות</h3>
+        <p>התחבר לרכב באמצעות הפקודה (החלף בכתובת ה-IP שלך):</p>
+        <pre>adb connect 172.20.10.5:5555</pre>
+        <div class="screenshot-container">
+            <img src="images/adb connect.jpeg" alt="adb connect">
+            <div class="screenshot-placeholder">[התחברות לרכב]</div>
+        </div>
+        <p>לאחר מכן הקלד <code>adb devices</code> וודא שהרכב מופיע ברשימה לצד המילה <code>device</code>.</p>
+        <div class="screenshot-container">
+            <img src="images/adb devices.jpeg" alt="adb devices">
+            <div class="screenshot-placeholder">[צפיה ברשימת המכשירים המחוברים]</div>
+        </div>        
+        <div class="warning-box">
+            <strong>פתרון תקלות:</strong> במידה ומתקבלת שגיאה או <code>Unauthorized</code>, חזור לשלב 10 במסך הרכב ולחץ מספר פעמים נוספות על <strong>ADB模式</strong> ואשר הודעות קופצות.
+        </div>
+        <div class="screenshot-container">
+            <img src="images/adb not connect.jpeg" alt="adb not connect">
+            <div class="screenshot-placeholder">[הודעת אי הצלחה להתחבר]</div>
+        </div>
+
+        <h3>שלב 16: התקנת אפליקציית AutoKit</h3>
+        <p>הרצ את פקודת ההתקנה:</p>
+        <pre>adb install autokit.apk</pre>
+        <p><em>המתנה: ההתקנה עשויה לקחת כדקה או יותר. המתן בסבלנות עד לקבלת הודעת Success.</em></p>
+        <div class="screenshot-container">
+            <img src="images/adb install success.jpeg.jpeg" alt="adb install">
+            <div class="screenshot-placeholder">[התקנת האפליקציה]</div>
+        </div>
+
+        <div class="btn-group">
+            <button class="nav-btn" onclick="switchTab(2)">&lt;&lt; הקודם</button>
+            <button class="nav-btn primary" onclick="switchTab(4)">הבא: הגדרות סופיות &gt;&gt;</button>
+        </div>
+    </section>
+
+    <!-- חלק 5: אימות והגדרות סופיות -->
+    <section class="step-section">
+        <h2>חלק ד': אימות, הגדרות וסיומת</h2>
+        
+        <h3>שלב 17: אימות ההתקנה ברכב</h3>
+        <p>לחץ על כפתור האפליקציות ברכב (אייקון 4 הריבועים בסרגל הניווט השמאלי) וודא שאפליקציית AutoKit מופיעה ברשימה.</p>
+        <div class="screenshot-container">
+            <img src="images/autokit app.png" alt="autokit">
+            <div class="screenshot-placeholder">[ווידוא במסך הרכב את הצלחת ההתקנה של האפליקציה AutoKit]</div>
+        </div>
+        <h3>שלב 18: החזרת שפת המערכת לעברית</h3>
+        <p>היכנס להגדרות הרכב (<code>Settings ⬅ Language</code>) ושנה חזרה את שפת הממשק לעברית.</p>
+        <p> היכנס להגדרות הרכב במסך הנהג באמצעות שליטה בגלגל ההגה לחיצה על כפתור ההגדרות בצד ימין בהגה וניווט באמצעות כפתורי הווליום (<code>הגדרות ⬅ הגדרות שפה</code>) ושנה את שפת הממשק מ-English ל-עברית.</p>
+        <div class="screenshot-container">
+            <img src="images/wheel.jpeg" alt="שינוי שפה 1">
+            <div class="screenshot-placeholder">[שינוי שפה 1]</div>
+        </div>
+        <div class="screenshot-container">
+            <img src="images/setting.jpeg" alt="שינוי שפה 2">
+            <div class="screenshot-placeholder">[שינוי שפה 2]</div>
+        </div>
+        <div class="screenshot-container">
+            <img src="images/lang 1.jpeg" alt="שינוי שפה 3">
+            <div class="screenshot-placeholder">[שינוי שפה 3]</div>
+        </div>
+        <div class="screenshot-container">
+            <img src="images/lang2.jpeg" alt="שינוי שפה 4">
+            <div class="screenshot-placeholder">[שינוי שפה 4]</div>
+        </div>
+
+        <h3>שלב 19: הגדרות באפליקציית AutoKit</h3>
+        <p>היכנס לאפליקציית AutoKit ⬅ לחץ על גלגל השיניים (הגדרות):</p>
+        <ol>
+            <li>הגדר את "הפעלה אוטומטית" על "אוטומטי".</li>
+            <li>לפעמים האפליקציה לא תעלה באופן אוטומטי במקרים אלו יש לחזור על שלב זה </li>
+
+            <li>תחת "הגדרות נוספות", הפעל את "הצגת סרגל תחתון" (מצב דלוק).</li>
+        </ol>
+
+        <h3>שלב 20: חיבור הדונגל והפעלת CarPlay / Android Auto</h3>
+        <p>חבר את דונגל ה-CCPA לשקע ה-USB ברכב. כעבור מספר שניות תופיע הנחיה לחבר את הטלפון הסלולרי, ומיד לאחר החיבור יופיע ממשק CarPlay / Android Auto על המסך!</p>
+
+        <div class="warning-box">
+            <strong>⚠️ אזהרת אחריות:</strong> כל תהליך אשר הופיע במדריך זה מבוצע על אחריותו הבלעדית והמלאה של המשתמש. איבוד נתונים או שיבוש במערכת ובאחריות הרכב אינם באחריות כותב המדריך.
+        </div>
+
+        <div class="btn-group">
+            <button class="nav-btn" onclick="switchTab(3)">&lt;&lt; הקודם</button>
+            <div></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>מדריך מותאם ל-Geely Geometry C 480/360 לאחר מתיחת הפנים | מתוחזק ב-GitHub Pages</p>
+    </footer>
+</div>
+
+<script>
+    function switchTab(index) {
+        const sections = document.querySelectorAll('.step-section');
+        const buttons = document.querySelectorAll('.tab-btn');
+
+        sections.forEach((sec, i) => {
+            sec.classList.toggle('active', i === index);
+        });
+
+        buttons.forEach((btn, i) => {
+            btn.classList.toggle('active', i === index);
+        });
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
