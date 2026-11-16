@@ -16,6 +16,8 @@
             --code-bg: #090d16;
             --warning-bg: #451a03;
             --warning-border: #f59e0b;
+            --whatsapp-color: #25d366;
+            --whatsapp-hover: #20ba5a;
         }
 
         * {
@@ -217,6 +219,91 @@
             background: var(--accent-hover);
         }
 
+        /* עיצוב אזור תמיכה ויצירת קשר בסגנון הכפתורים העליונים */
+        .support-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .support-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            border: none;
+        }
+
+        .support-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .support-btn {
+            display: block;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: #0f172a;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.2s, transform 0.1s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .support-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn {
+            background-color: var(--whatsapp-color);
+            color: #fff;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--whatsapp-hover);
+        }
+
+        /* התראת העתקת מספר */
+        #toast {
+            visibility: hidden;
+            background-color: #334155;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px 20px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadeInOut 2.5s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, 20px); }
+            15% { opacity: 1; transform: translate(-50%, 0); }
+            85% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
+        }
+
+
         footer {
             text-align: center;
             margin-top: 40px;
@@ -230,6 +317,8 @@
             body { padding: 10px; }
             header h1 { font-size: 1.4rem; }
             .step-section { padding: 15px; }
+            .btn-group {flex-direction: column;gap: 10px;}
+            .nav-btn {width: 100%;text-align: center;}
         }
     </style>
 </head>
@@ -513,7 +602,31 @@
             <div></div>
         </div>
     </section>
+
+    <!-- אזור תמיכה, וואטסאפ ותרומה (Bit / PayBox) -->
+    <div class="support-section">
+        <h3>אהבת את המדריך? זקוק לעזרה או רוצה לפרגן?</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">מוזמן ליצור קשר בוואטסאפ או לתמוך בפיתוח ותחזוקת המדריך:</p>
+        <div class="support-buttons">
+            <!-- כפתור וואטסאפ -->
+            <a href="https://wa.me/972508640839?text=%Dשלום%20דרור,%20השתמשתי%20במדריך%20שלך%20לג'ילי%20ואשמח%20לשוחח" target="_blank" rel="noopener noreferrer" class="support-btn whatsapp-btn">
+                💬 שלח הודעה בוואטסאפ
+            </a>
+            <!-- כפתור ביט -->
+            <a href="https://www.bitpay.co.il/app/me/626AF067-4BBA-3E18-2299-F89EF9E6CE1F84C0?force_isolation=true" target="_blank" rel="noopener noreferrer" class="support-btn">
+                💜 תרומה ב-Bit
+            </a>
+            <!-- כפתור פייבוקס (הועתק למספר או שונה לקישור לבחירתך) -->
+            <button onclick="copyToClipboard('0508640839', 'מספר ה-PayBox (050-8640839) הועתק ללוח בהצלחה!')" class="support-btn">
+                🧡 תרומה ב-PayBox (050-8640839)
+            </button>
+        </div>
+    </div>
+
+    <!-- הודעת Toast לצילום/העתקה -->
+    <div id="toast">המספר הועתק בהצלחה!</div>
     
+
     <footer>
         <p>מדריך מותאם ל-Geely Geometry C 480/360 לאחר מתיחת הפנים | מתוחזק ב-GitHub Pages</p>
     </footer>
@@ -533,6 +646,20 @@
         });
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function copyToClipboard(text, message) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast(message);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = "show";
+        setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
     }
 </script>
 </body>
