@@ -459,20 +459,17 @@
         </div>
 
 
-        <h3>שלב 9 & 10: כניסה שנייה לחייגן והפעלת ADB</h3>
+        <h3>שלב 9: הפעלת ADB</h3>
         <ol>
-            <li>חזור למסך החייגן ברכב והקש שוב את הקוד הדינמי השני המעודכן לפי השעה הנוכחית.</li>
-            <p>פתח את אפליקציית הטלפון/חייגן ברכב והקש קוד דינמי השני:</p>
-            <pre>#* + [חודש + 5] + [יום בחודש] + [שעה בפורמט 12 שעות]</pre>
-            <p><em>דוגמה: בתאריך 17/03 בשעה 21:15 (09:15 בפורמט 12 שעות) — חודש (03)+5 = 08, יום = 17, שעה = 09 ⬅ הקוד יהיה <code>#*081709</code>.</em></p>
-
-            <li>בתפריט הדיאגנוסטיקה שנפתח, אתר בשורה השנייה מימין את הכפתור <strong>ADB模式</strong> [מסומן בירוק] ולחץ עליו  <strong>3</strong>פעמים ברציפות (שים לב להופעת חיווי בתחתית המסך) [מסומן בצהוב].</li>
+            <li> חזור למסך התפריט הנסתר.</li>
+            <div class="screenshot-container">
+                <img src="images/adb connect.png" alt="תפריט נסתר 2">
+                <div class="screenshot-placeholder">[תפריט נסתר 2]</div>
+            </div>
+            <li>בתפריט הנסתר יש ללחוץ על  <strong>ADB模式</strong> [מסומן באדום] ולחץ עליו  <strong>3</strong> פעמים ברציפות (שים לב להופעת חיווי בתחתית המסך) .</li>
         </ol>
 
-        <div class="screenshot-container">
-            <img src="images/hide 2 adb coneect.png" alt="תפריט נסתר 2">
-            <div class="screenshot-placeholder">[תפריט נסתר 2]</div>
-        </div>
+
 
         <div class="btn-group">
             <button class="nav-btn" onclick="switchTab(1)">&lt;&lt; הקודם</button>
@@ -484,7 +481,7 @@
     <section class="step-section">
         <h2>חלק ג': התחברות והתקנה מהמחשב (CMD)</h2>
         
-        <h3>שלב 11: פתיחת שורת הפקודות במחשב</h3>
+        <h3>שלב 10: פתיחת שורת הפקודות במחשב</h3>
         <p>לחץ על מקשים <code>Windows + R</code>, הקלד <code>cmd</code> ולחץ Enter.</p>
 
         <div class="screenshot-container">
@@ -492,14 +489,14 @@
             <div class="screenshot-placeholder">[כניסה ל CMD]</div>
         </div>
 
-        <h3>שלב 12: ניווט לתיקיית העבודה</h3>
+        <h3>שלב 11: ניווט לתיקיית העבודה</h3>
         <pre>cd C:\platform-tools</pre>
         <div class="screenshot-container">
             <img src="images/cd.png" alt="cd C:\platform-tools">
             <div class="screenshot-placeholder">[הגדרת הפקודות בתיקיית ADB במחשב]</div>
         </div>
 
-        <h3>שלב 13: בדיקת תקשורת לרכב (Ping)</h3>
+        <h3>שלב 12: בדיקת תקשורת לרכב (Ping)</h3>
         <p>בצע בדיקת חיבור לרכב (החלף את ה-IP בכתובת שרשמת בשלב 5):</p>
         <pre>ping 172.20.10.5</pre>
         <p>וודא שמתקבלות תשובות תקינות. [כמו בתמונה]</p>
@@ -508,7 +505,7 @@
             <div class="screenshot-placeholder">[ביצוע פינג ]</div>
         </div>
 
-        <h3>שלב 14: הגדרת תקשורת ADB ברשת</h3>
+        <h3>שלב 13: הגדרת תקשורת ADB ברשת</h3>
         <pre>adb tcpip 5555</pre>
         <div class="screenshot-container">
             <img src="images/adb tcpip.jpeg" alt="tcpip">
@@ -516,7 +513,7 @@
         </div>
 
 
-        <h3>שלב 15: התחברות למערכת הרכב ואימות</h3>
+        <h3>שלב 14: התחברות למערכת הרכב ואימות</h3>
         <p>התחבר לרכב באמצעות הפקודה (החלף בכתובת ה-IP שלך):</p>
         <pre>adb connect 172.20.10.5:5555</pre>
         <div class="screenshot-container">
@@ -536,7 +533,7 @@
             <div class="screenshot-placeholder">[הודעת אי הצלחה להתחבר]</div>
         </div>
 
-        <h3>שלב 16: התקנת אפליקציית AutoKit</h3>
+        <h3>שלב 15: התקנת אפליקציית AutoKit</h3>
         <p>הרץ את פקודת ההתקנה:</p>
         <pre>adb install autokit.apk</pre>
         <p><em>המתנה: ההתקנה עשויה לקחת כדקה או יותר. המתן בסבלנות עד לקבלת הודעת Success.</em></p>
@@ -555,13 +552,13 @@
     <section class="step-section">
         <h2>חלק ד': אימות, הגדרות וסיומת</h2>
         
-        <h3>שלב 17: אימות ההתקנה ברכב</h3>
+        <h3>שלב 16: אימות ההתקנה ברכב</h3>
         <p>לחץ על כפתור האפליקציות ברכב (אייקון 4 הריבועים בסרגל הניווט השמאלי) וודא שאפליקציית AutoKit מופיעה ברשימה.</p>
         <div class="screenshot-container">
             <img src="images/autokit app.png" alt="autokit">
             <div class="screenshot-placeholder">[ווידוא במסך הרכב את הצלחת ההתקנה של האפליקציה AutoKit]</div>
         </div>
-        <h3>שלב 18: החזרת שפת המערכת לעברית</h3>
+        <h3>שלב 17: החזרת שפת המערכת לעברית</h3>
         <p>היכנס להגדרות הרכב (<code>Settings ⬅ Language</code>) ושנה חזרה את שפת הממשק לעברית.</p>
         <p> היכנס להגדרות הרכב במסך הנהג באמצעות שליטה בגלגל ההגה לחיצה על כפתור ההגדרות בצד ימין בהגה וניווט באמצעות כפתורי הווליום (<code>הגדרות ⬅ הגדרות שפה</code>) ושנה את שפת הממשק מ-English ל-עברית.</p>
         <div class="screenshot-container">
@@ -581,7 +578,7 @@
             <div class="screenshot-placeholder">[שינוי שפה 4]</div>
         </div>
 
-        <h3>שלב 19: הגדרות באפליקציית AutoKit</h3>
+        <h3>שלב 18: הגדרות באפליקציית AutoKit</h3>
         <p>היכנס לאפליקציית AutoKit ⬅ לחץ על גלגל השיניים (הגדרות):</p>
         <ol>
             <li>הגדר את "הפעלה אוטומטית" על "אוטומטי".</li>
@@ -590,7 +587,7 @@
             <li>תחת "הגדרות נוספות", הפעל את "הצגת סרגל תחתון" (מצב דלוק).</li>
         </ol>
 
-        <h3>שלב 20: חיבור הדונגל והפעלת CarPlay / Android Auto</h3>
+        <h3>שלב 19: חיבור הדונגל והפעלת CarPlay / Android Auto</h3>
         <p>חבר את דונגל ה-CCPA לשקע ה-USB ברכב. כעבור מספר שניות תופיע הנחיה לחבר את הטלפון הסלולרי, ומיד לאחר החיבור יופיע ממשק CarPlay / Android Auto על המסך!</p>
 
         <div class="warning-box">
